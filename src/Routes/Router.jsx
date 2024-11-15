@@ -2,6 +2,9 @@ import { createBrowserRouter, Navigate } from "react-router-dom";
 import HomeLayout from "../layouts/HomeLayout";
 import CategoryNews from "../Category/CategoryNews";
 import AuthLayout from "../layouts/AuthLayout";
+import Login from "../Category/Login";
+import Register from "../Category/Register";
+import NewsDetails from "../Category/NewsDetails";
 
 const Router = createBrowserRouter([
   {
@@ -23,8 +26,10 @@ const Router = createBrowserRouter([
     ],
   },
   {
-    path: "news",
-    element: <h1>News</h1>,
+    path: "news/:id",
+    element: <NewsDetails></NewsDetails>,
+    loader: ({ params }) =>
+      fetch(`https://openapi.programming-hero.com/api/news/${params.id}`),
   },
   {
     path: "auth",
@@ -32,11 +37,11 @@ const Router = createBrowserRouter([
     children: [
       {
         path: "/auth/login",
-        element: <h3>login</h3>,
+        element: <Login></Login>,
       },
       {
         path: "/auth/register",
-        element: <h3>Register</h3>,
+        element: <Register></Register>,
       },
     ],
   },
